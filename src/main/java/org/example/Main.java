@@ -4,74 +4,43 @@ import java.util.Scanner;
 
 //TIP 要<b>运行</b>代码，请按 <shortcut actionId="Run"/> 或
 // 点击间距中的 <icon src="AllIcons.Actions.Execute"/> 图标。
-public class Main {public static void main(String[] args) {
+public class Main {
+    public static void main(String[] args) {
+
     Scanner scanner = new Scanner(System.in);
+    Event event = new Event();
+    HandleComplementaryPasses complementaryPasses = new HandleComplementaryPasses();
+    HandlePerformance handlePerformance = new HandlePerformance();
 
-
-    System.out.print("Enter Event ID: ");
-    String eventID = scanner.nextLine();
-
-    System.out.print("Enter Event Name: ");
-    String eventName = scanner.nextLine();
-
-    System.out.print("Enter Event Venue: ");
-    String eventVenue = scanner.nextLine();
-
-    System.out.print("Enter Event Date: ");
-    String eventDate = scanner.nextLine();
-
-    Event event = new Event(eventID, eventName, eventVenue, eventDate);
-
-
-
-    boolean exit = false;
-    while (!exit) {
+    int choice ;
+    do {
         System.out.println("\n--- Event Organizer Menu ---");
-        System.out.println("1. Add Attendee");
-        System.out.println("2. Remove Attendee");
-        System.out.println("3. Update Attendee");
-        System.out.println("4. Find Attendee");
-        System.out.println("5. Display Event Details");
-        System.out.println("6. Exit");
-
+        System.out.println("1. Display Event Details");
+        System.out.println("2. enter Attendee information");
+        System.out.println("3. remove Attendee");
+        System.out.println("4. update Attendee");
+        System.out.println("5. find Attendee");
+        System.out.println("6. display all the attendees from the event");
+        System.out.println("7.enter 7 to over the program");
+        System.out.println("8. Handle complementary passes");
+        System.out.println("9.Handle performances");
+        System.out.println("10.Get seat details");
         System.out.print("Enter your choice: ");
-        int choice = scanner.nextInt();
+        choice = scanner.nextInt();
         scanner.nextLine();
-
-        switch (choice) {
-            case 1:
-                System.out.print("Enter Attendee Name: ");
-                String attendeeName = scanner.nextLine();
-                event.addAttendee(attendeeName);
-                break;
-            case 2:
-                System.out.print("Enter Attendee Name: ");
-                String removeName = scanner.nextLine();
-                event.removeAttendee(removeName);
-                break;
-            case 3:
-                System.out.print("Enter Old Attendee Name: ");
-                String oldName = scanner.nextLine();
-                System.out.print("Enter New Attendee Name: ");
-                String newName = scanner.nextLine();
-                String app= event.updateAttendee(oldName, newName);
-                System.out.print(app);
-                break;
-            case 4:
-                System.out.print("Enter Attendee Name: ");
-                String findName = scanner.nextLine();
-                System.out.println(event.findAttendee(findName));
-                break;
-            case 5:
-                System.out.println(event.toString());
-                break;
-            case 6:
-                exit = true;
-                break;
-            default:
-                System.out.println("Invalid choice. Please try again.");
+        event.organizedEvent(choice);
+        if(choice ==8){
+        complementaryPasses.handleComplenmentaryPasses();
         }
-    }
+        if(choice ==9){
+            handlePerformance.handleperformance();
+        }
+    }while (choice !=7);
+    scanner.close();
 }
 }
+
+
+
+
 
